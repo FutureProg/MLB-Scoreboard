@@ -13,13 +13,17 @@ import Home from './Pages/Home';
 import './App.css';
 
 
-const composeEnhancers = process.env.NODE_ENV !== 'production' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose;
-const history = createHistory();
+const composeEnhancers = process.env.NODE_ENV !== 'production' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose : compose; // used for debugging purposes
+const history = createHistory(); 
 const store = createStore(
   reducers,   
   composeEnhancers(applyMiddleware(thunk, routerMiddleware(history)))
-  );
+  ); // create the redux store with the necessary enhancers
 
+/** 
+ * Top Level Container for the app
+ * In charge of managing routing and redux storage
+*/
 class App extends Component {
   render() {
     return (      
