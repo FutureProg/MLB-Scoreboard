@@ -12,6 +12,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
+import classNames from 'classnames';
 
 const DefaultImage = require("../images/logos/mlb.png");
 
@@ -23,8 +24,9 @@ class ScoreItem extends React.Component{
 	}
 
 	navigate(){
-		var url = "/details/" + this.props.date.getFullYear();		
-		url += "/" + this.props.date.getMonth();
+		if(!this.props.clickable)return;
+		var url = "/details/" + this.props.index + "/" + this.props.date.getFullYear();		
+		url += "/" + (this.props.date.getMonth()+1);
 		url += "/" + this.props.date.getDate();
 		url += "/" + this.props.dataDirectory.slice(47);
 		this.props.nav(url);
@@ -50,8 +52,11 @@ class ScoreItem extends React.Component{
 		else if(this.props.status === "Cancelled"){
 			statusColour = "#FF3E3E";
 		}
+		var cname = classNames("score-item",
+			{clickable: this.props.clickable}
+		);
 		return (
-			<div className="score-item" onClick={this.navigate} tabIndex={0}>
+			<div className={cname} onClick={this.navigate} tabIndex={0}>
 				<div className="score-bar">
 					<div className="team-name" style={{background: homewins && !tie? "rgba(41,189,235,0.5)" :"initial" }}>
 						<span>{this.props.hometeam.name}</span>

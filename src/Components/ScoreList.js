@@ -37,8 +37,8 @@ class ScoreList extends React.Component{
 				},
 				status: item['status']? item['status']['status']:null,
 				dataDirectory: item['game_data_directory']
-			};
-			return <ScoreItem key={index} {...itemProps} />
+			};			
+			return <ScoreItem key={index} index={index} {...itemProps} clickable={true} />
 		};
 		var list;
 		if(!this.props.fetching){

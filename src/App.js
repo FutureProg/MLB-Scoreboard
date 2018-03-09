@@ -32,7 +32,7 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <Switch> 
             <Route name="home" exact path="/" component={Home}/>     
-            <Route name="details" path="/details/:year/:month/:day/:dir" component={DetailPage}/>              
+            <Route name="details" path="/details/:index/:year/:month/:day/:dir" component={DetailPage}/>              
           </Switch>
         </ConnectedRouter>      
       </Provider>            
