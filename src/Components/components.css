@@ -2,6 +2,9 @@
 	width: 400px;
 	margin: 0 auto;
 }
+#calendar-container button{
+	text-align: center;
+}
 #calendar-header{
 	display: grid;
 	grid-template-columns: 1fr 2fr 1fr;	
@@ -94,8 +97,13 @@
 }
 .score-item .score-bar .team-name img{	
 	height: 70px;
-	width: auto;
+	width: auto;		
 	margin: 0 10px;
+}
+@media (max-width:980px){
+	.score-item .score-bar .team-name span{
+		display: none;		
+	}
 }
 .score-item .score-bar .team-name:last-child{
 	text-align: left;
@@ -110,6 +118,7 @@
 	width: 100%;
 	height: 90px;
 	border: 2px solid #979797;		
+	border-top: 0;	
 	border-width: 1px 2px;
 	text-align: center;	
 	vertical-align: middle;

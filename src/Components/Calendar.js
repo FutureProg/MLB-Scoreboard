@@ -44,7 +44,7 @@ class Calendar extends React.Component{
 	}
 
 	populateDays(index,date){		
-		if(index >= 35) return [];
+		if(index >= 42) return [];
 		var content = "";
 		var handler = null;
 		var prevDate = new Date(date);
@@ -96,6 +96,9 @@ class Calendar extends React.Component{
 						this.populateDays(0,firstDayRef)
 					}
 				</div>
+				<div style={{textAlign:'center',marginTop:'10px'}}>
+					<button className="action" onClick={()=>{this.props.changeDate(new Date())}}>Today</button>
+				</div>					
 			</div>
 		)
 	}

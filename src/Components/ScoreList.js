@@ -12,6 +12,19 @@ const LoadingSymbol = require("../images/loading.gif");
 class ScoreList extends React.Component{
 
 	render(){	
+		const sortFavourite = (games)=>{			
+			var faves = [];
+			console.log(games);
+			for(var i in games){				
+				if(games[i]['away_team_name'] === 'Blue Jays' || games[i]['home_team_name'] === 'Blue Jays'){					
+					console.log("Found jays at " + i);
+					faves.push(games[i]);
+					games[i] = null;
+				}
+			}												
+			return ([...faves,...games]).filter((item)=>item !== null);
+		}
+
 		const getScores = (item,index)=>{
 			var itemProps = {
 				awayteam: {
@@ -26,7 +39,15 @@ class ScoreList extends React.Component{
 			};
 			return <ScoreItem key={index} {...itemProps} />
 		};
-		const list = this.props.scores instanceof Array? this.props.scores.map(getScores):getScores(this.props.scores,0);
+		var list;
+		if(!this.props.fetching){
+			if(this.props.scores instanceof Array){
+				var sortedGames = sortFavourite(this.props.scores);
+				list = sortedGames.map(getScores);
+			}else{
+				list = getScores(this.props.scores,0);
+			}		
+		}
 
 		return (
 			<React.Fragment>
