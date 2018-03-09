@@ -9,6 +9,7 @@ import createHistory from 'history/createBrowserHistory';
 import {routerMiddleware, ConnectedRouter} from 'react-router-redux';
 
 import Home from './Pages/Home';
+import DetailPage from './Pages/DetailPage';
 
 import './App.css';
 
@@ -30,7 +31,8 @@ class App extends Component {
       <Provider store={store}>  
         <ConnectedRouter history={history}>
           <Switch> 
-            <Route name="home" exact path="/" component={Home}/>                   
+            <Route name="home" exact path="/" component={Home}/>     
+            <Route name="details" path="/details/:year/:month/:day/:dir" component={DetailPage}/>              
           </Switch>
         </ConnectedRouter>      
       </Provider>            

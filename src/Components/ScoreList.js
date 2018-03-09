@@ -35,7 +35,8 @@ class ScoreList extends React.Component{
 					name: item['home_team_name'],
 					score: item['linescore']? item['linescore']['r']['home']:null
 				},
-				status: item['status']? item['status']['status']:null
+				status: item['status']? item['status']['status']:null,
+				dataDirectory: item['game_data_directory']
 			};
 			return <ScoreItem key={index} {...itemProps} />
 		};

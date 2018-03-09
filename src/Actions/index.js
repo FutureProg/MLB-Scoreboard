@@ -26,4 +26,21 @@ export let changeDate = dispatch => (nDate) =>{
 	
 }
 
+let requestDetails = createAction(Constants.REQUEST_DETAILS);
+let requestDetailsSuccess = createAction(Constants.DETAILS_GET_SUCCESS);
+let requestDetailsFailure = createAction(Constants.DETAILS_GET_FAILURE);
+export let getDetails = dispatch => (dataDirectory)=>{
+	dispatch(requestDetails());
+	var url = "http://gd2.mlb.com" + dataDirectory + "/boxscore.json";
+	fetch(url)
+	.then((response)=>response.json())
+	.then((json)=>{
+		dispatch(requestDetailsSuccess(json.data.boxscore));
+	})
+	.catch((error)=>{
+		dispatch(requestDetailsFailure());
+		console.log(error);
+	})
+}
+
 export let constants = Constants;
