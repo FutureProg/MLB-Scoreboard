@@ -10,8 +10,8 @@ import {connect} from 'react-redux';
 import ScoreList from '../Components/ScoreList'
 import Calendar from '../Components/Calendar';
 
-class Home extends React.Component{
-	
+class Home extends React.Component{	
+
 	render(){
 		return (
 			<div className="page" id="home">
@@ -19,6 +19,10 @@ class Home extends React.Component{
 				<div id="content-container">
 					<div className="content">
 						<h2>Scores</h2>
+						<div id="score-header">
+							<span>Home</span>
+							<span>Away</span>
+						</div>
 						<ScoreList/>
 					</div>			
 					<div>

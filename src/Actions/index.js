@@ -1,27 +1,29 @@
 import {createAction} from 'redux-actions';
 import * as Constants from './constants';
 
-let modifyDate = createAction(Constants.DATE_CHANGED,(date)=>({date}));
+let modifyDate = createAction(Constants.DATE_CHANGED,(date)=>date);
 let modifyScores = createAction(Constants.SCORES_GET_SUCCESS);
-export let changeDate = dispatch => (nDate) =>{
-	modifyDate(nDate);
+let requestScores = createAction(Constants.REQUEST_SCORES);
+let requestScoresFailure = createAction(Constants.SCORES_GET_FAILURE);
+export let changeDate = dispatch => (nDate) =>{	
+	dispatch(modifyDate(nDate));
 
 	var url = "http://gd2.mlb.com/components/game/mlb";
 	url = url + "/year_" + nDate.getFullYear();
-	url = url + "/month_" + (nDate.getMonth() + 1);
-	url = url + "/day_" + (nDate.getDay() < 10 ? "0" : "") + nDate.getDay();
-	url += "master_scoreboard.json";
+	url = url + "/month_" + (nDate.getMonth() + 1 < 10? "0" :"") + (nDate.getMonth() + 1);
+	url = url + "/day_" + (nDate.getDate() < 10 ? "0" : "") + nDate.getDate();
+	url += "/master_scoreboard.json";
+	dispatch(requestScores());
 	fetch(url)
 	.then((response)=>response.json())
 	.then((json)=>{
-		modifyScores(json.data.games);
+		dispatch(modifyScores(json.data.games));
 	})
 	.catch((error)=>{
-		dispatch(Constants.SCORES_GET_FAILURE);
+		dispatch(requestScoresFailure());
 		console.log(error);
 	});
-
-	dispatch(Constants.REQUEST_SCORES);
+	
 }
 
 export let constants = Constants;

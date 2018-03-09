@@ -4,17 +4,33 @@
   grid-template-rows: 1fr;
 
   padding: 30px;
-  padding-bottom: 0;
+  padding-bottom: 20px;
 }
 
 .page .content{
   border: 1px solid rgb(17, 17, 17);
   border-radius: 5px;
-  /* border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0; */
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
   
   min-height: 600px;  
 }
 .page .content h2{
   text-align: center;
+}
+
+.loading-zone{
+  text-align: center;
+}
+
+#score-header{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+
+  font-size: 1.3em;
+  font-weight: 500;
+
+  margin-bottom: 10px;
 }

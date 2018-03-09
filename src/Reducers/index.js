@@ -5,7 +5,9 @@ import {constants} from '../Actions';
 const scores = (
 	state = {
 		date:new Date(),
-		games:[],
+		games:{
+			game:[]
+		},
 		fetching: false,
 		error: false
 	},
@@ -16,7 +18,7 @@ const scores = (
 		return {
 			...state,
 			error: false,
-			date: action.payload			
+			date: action.payload
 		}		
 		case constants.REQUEST_SCORES:
 		return {
