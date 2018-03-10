@@ -11,6 +11,7 @@ class ScoreBoard extends React.Component{
 	
 	render(){		
 		if(this.props.details['status_ind'] === 'P') return null;
+		if(!this.props.details['linescore'])return null;
 		const createBoard = (team)=>{		
 			// if there is no score information available, display N/A
 			if(!(this.props.details['linescore']['inning_line_score'] instanceof Array)) return (
@@ -31,7 +32,7 @@ class ScoreBoard extends React.Component{
 					<td>{this.props.details['linescore'][team+'_team_errors']}</td>
 				</React.Fragment>
 			)
-		}		
+		}				
 
 		return (
 			<div id="score-board">
@@ -39,7 +40,7 @@ class ScoreBoard extends React.Component{
 					<thead>
 						<tr>
 							<th>Team Name</th>
-							{
+							{									
 								this.props.details['linescore']['inning_line_score'] instanceof Array? // safe-guard in case there is no score information
 								this.props.details['linescore']['inning_line_score'].map((item,index)=><th key={index}>{index+1}</th>)
 								:null

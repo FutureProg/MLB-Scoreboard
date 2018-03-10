@@ -28,6 +28,7 @@ class BattingBoard extends React.Component{
 	}
 
 	render(){
+		if(!this.props.details.batting)return null;
 		// render the information per player
 		const fetchData = this.props.details.batting[this.state.team].batter.map((item,index)=>{
 			return (
