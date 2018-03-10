@@ -7,6 +7,7 @@
  * - - {score: integer, name: string}
  * - status: string
  * - dataDirectory: string
+ * - index: integer
  */
 
 import React from 'react';
@@ -25,7 +26,7 @@ class ScoreItem extends React.Component{
 
 	navigate(){
 		if(!this.props.clickable)return;
-		var url = "/details/" + this.props.index + "/" + this.props.date.getFullYear();		
+		var url = "/details/" + this.props.dataDirectory.slice(17,20) + "/" + this.props.index + "/" + this.props.date.getFullYear();		
 		url += "/" + (this.props.date.getMonth()+1);
 		url += "/" + this.props.date.getDate();
 		url += "/" + this.props.dataDirectory.slice(47);
@@ -56,7 +57,7 @@ class ScoreItem extends React.Component{
 			{clickable: this.props.clickable}
 		);
 		return (
-			<div className={cname} onClick={this.navigate} tabIndex={0}>
+			<div className={cname} onClick={this.navigate} tabIndex={this.props.clickable? 0:-1}>
 				<div className="score-bar">
 					<div className="team-name" style={{background: homewins && !tie? "rgba(41,189,235,0.5)" :"initial" }}>
 						<span>{this.props.hometeam.name}</span>

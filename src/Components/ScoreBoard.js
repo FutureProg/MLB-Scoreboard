@@ -6,7 +6,15 @@ import './components.css';
 class ScoreBoard extends React.Component{
 	
 	render(){		
+		if(this.props.details['status_ind'] === 'P') return null;
 		const createBoard = (team)=>{		
+			if(!(this.props.details['linescore']['inning_line_score'] instanceof Array)) return (
+				<React.Fragment>					
+					<td>N/A</td>
+					<td>N/A</td>
+					<td>N/A</td>
+				</React.Fragment>
+			);
 			var re = this.props.details['linescore']['inning_line_score'].map(
 				(item,index)=><td key={index}>{item[team]}</td>
 			);
@@ -18,7 +26,7 @@ class ScoreBoard extends React.Component{
 					<td>{this.props.details['linescore'][team+'_team_errors']}</td>
 				</React.Fragment>
 			)
-		}
+		}		
 
 		return (
 			<div id="score-board">
@@ -27,7 +35,9 @@ class ScoreBoard extends React.Component{
 						<tr>
 							<th>Team Name</th>
 							{
+								this.props.details['linescore']['inning_line_score'] instanceof Array? 
 								this.props.details['linescore']['inning_line_score'].map((item,index)=><th key={index}>{index+1}</th>)
+								:null
 							}
 							<th>R</th>
 							<th>H</th>
@@ -53,7 +63,8 @@ class ScoreBoard extends React.Component{
 }
 
 const mstp = state =>({
-	details: state.details.data
+	details: state.details.data,
+	fetching: state.details.fetching
 })
 
 export default connect(mstp)(ScoreBoard);

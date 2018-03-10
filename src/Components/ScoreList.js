@@ -12,19 +12,21 @@ const LoadingSymbol = require("../images/loading.gif");
 class ScoreList extends React.Component{
 
 	render(){	
+		// sort your favourites, so Bluejays appear on the top
 		const sortFavourite = (games)=>{			
-			var faves = [];
-			console.log(games);
-			for(var i in games){				
-				if(games[i]['away_team_name'] === 'Blue Jays' || games[i]['home_team_name'] === 'Blue Jays'){					
-					console.log("Found jays at " + i);
+			var faves = [];			
+			for(var i in games){ // sort into a new array to keep other games in chronological order
+				if(games[i] === null) continue;
+				games[i]['index'] = i;
+				if(games[i]['away_team_name'] === 'Blue Jays' || games[i]['home_team_name'] === 'Blue Jays'){										
 					faves.push(games[i]);
 					games[i] = null;
-				}
+				}								
 			}												
 			return ([...faves,...games]).filter((item)=>item !== null);
 		}
-
+		
+		// Function to pull information from the redux store for the ScoreItem to be rendered
 		const getScores = (item,index)=>{
 			var itemProps = {
 				awayteam: {
@@ -36,14 +38,18 @@ class ScoreList extends React.Component{
 					score: item['linescore']? item['linescore']['r']['home']:null
 				},
 				status: item['status']? item['status']['status']:null,
-				dataDirectory: item['game_data_directory']
+				dataDirectory: item['game_data_directory'],
+				index: item.index
 			};			
-			return <ScoreItem key={index} index={index} {...itemProps} clickable={true} />
+			return <ScoreItem key={index} {...itemProps} clickable={true} />
 		};
+
+		// Check if it's an array, if so, sort it and map the information. 
+		// If not, just get the information
 		var list;
 		if(!this.props.fetching){
 			if(this.props.scores instanceof Array){
-				var sortedGames = sortFavourite(this.props.scores);
+				var sortedGames = sortFavourite(this.props.scores.slice());
 				list = sortedGames.map(getScores);
 			}else{
 				list = getScores(this.props.scores,0);
@@ -53,13 +59,13 @@ class ScoreList extends React.Component{
 		return (
 			<React.Fragment>
 				{
-					this.props.fetching? 
+					this.props.fetching?  // if we're still fetching, show the loading symbol
 						<div className="loading-zone">
 							<img src={LoadingSymbol} alt="Loading"/>
 						</div>:
-						list.length === 0? 
+						list.length === 0?  // if we're done, but there isn't any information, tell the user
 							<h2>No games found for this date</h2>
-							:list
+							:list // render the content
 				}
 			</React.Fragment>
 		)

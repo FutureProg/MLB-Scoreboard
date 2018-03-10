@@ -146,17 +146,37 @@
 	border-top: 1px solid #979797;
 }
 
-#score-board{
-
+button.toggle{
+	border: none;
+	color: white;
+	background: #29BDEB;
+	padding: 10px 20px;
+	font-size: 1em;
+	border-radius: 10px;  
+	box-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
-#score-board table{
+button.toggle.selected{
+	box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);;
+}
+
+#score-board table, #batting-board table{
 	width: 100%;		
 	border-collapse: collapse;
 }
-#score-board th,#score-board td{
+#score-board td, #batting-board td{
+	font-weight: 300;
+}
+#score-board th,#score-board td, #batting-board th,#batting-board td{
 	padding: 10px;	
 	text-align: center;
 }
-#score-board table, #score-board th, #score-board td{
+#score-board table, #score-board th, #score-board td,
+#batting-board table, #batting-board th, #batting-board td{
 	border: 1px solid #979797;
+}
+
+#batting-board .toggle-group{
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: space-around;
 }
