@@ -11,7 +11,6 @@ import {changeDate} from '../Actions';
 import './components.css';
 
 const Arrow = require('../images/arrow.svg');
-//const ArrowDisabled = require('../images/arrow-disabled.svg'); -- not using so users can look ahead at future matches
 
 var months = [
 	'January','February','March','April','May',
@@ -43,6 +42,8 @@ class Calendar extends React.Component{
 		this.props.changeDate(nDate);				
 	}
 
+	// render the days onto the square, matching each date to their appropriate
+	// days (e.g. Sun, Mon, Tues)
 	populateDays(index,date){		
 		if(index >= 42) return [];
 		var content = "";
@@ -52,17 +53,17 @@ class Calendar extends React.Component{
 			// still checking for first date
 		}else{			
 			date.setDate(date.getDate() + 1);			
-			if(prevDate.getMonth() === this.props.date.getMonth()){
+			if(prevDate.getMonth() === this.props.date.getMonth()){ // if the month hasn't changed, keep adding
 				let d = new Date(prevDate);
 				content = prevDate.getDate() + "";								
 				handler = ()=>{										
 					this.props.changeDate(d);
 				}
 			}
-		}	
+		}			
 		var cnames = classNames('day',{
-			disabled: content === "",
-			selected: this.props.date.getDate() === prevDate.getDate()
+			disabled: content === "", // if there is no date for this square, gray it out
+			selected: this.props.date.getDate() === prevDate.getDate() // if it's selected, blue it
 		})
 		return [
 			<div key={index} className={cnames} onClick={handler}>{content}</div>,
@@ -74,7 +75,7 @@ class Calendar extends React.Component{
 		const month = months[this.props.date.getMonth()];
 		const year = this.props.date.getFullYear();		
 		const firstDayRef = new Date(this.props.date);
-		firstDayRef.setDate(1);		
+		firstDayRef.setDate(1);	 // get the first day of the month for building the calendar
 		return (
 			<div id="calendar-container">
 				<div id="calendar-header">

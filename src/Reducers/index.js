@@ -1,7 +1,12 @@
+/**
+ * Contains the reducers to be used by the application for the redux store
+ */
+
 import {combineReducers} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import {routerReducer} from 'react-router-redux'; // the reducer for navigation
 import {constants} from '../Actions';
 
+// Reducer for game inning scoreboard
 const details = (
 	state = {
 		data: {},
@@ -34,6 +39,7 @@ const details = (
 	}
 }
 
+// Reducer for game date, and list of games that occured on that date
 const scores = (
 	state = {
 		date:new Date(),

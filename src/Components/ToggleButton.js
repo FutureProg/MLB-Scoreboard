@@ -1,6 +1,8 @@
 /**
  * Toggle Button
  * Accepts the following properties
+ * - name: string => name to represent the object, will be sent to the callback
+ * - onToggle: function => the callback for when the state is toggled
  */
 
 import React from 'react';

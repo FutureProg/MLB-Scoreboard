@@ -1,3 +1,9 @@
+/**
+ * Contains and manages the state of the ToggleButtons
+ * Takes the properties:
+ * - onToggle: function => callback that sends the name of the enabled button
+ */
+
 import React from 'react';
 
 export default class ToggleGroup extends React.Component{
@@ -16,7 +22,7 @@ export default class ToggleGroup extends React.Component{
 
 	componentWillMount(){
 		this.setState({
-			toggled: this.props.children.map((_,index)=>(index === 0? true: false))
+			toggled: this.props.children.map((_,index)=>(index === 0? true: false)) 
 		});
 	}
 

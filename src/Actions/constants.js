@@ -1,3 +1,5 @@
+// Holds the commands for all of the redux actions
+
 export let DATE_CHANGED = "DATE_CHANGED";
 
 export let REQUEST_SCORES = "REQUEST_SCORES";

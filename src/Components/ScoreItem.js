@@ -43,7 +43,9 @@ class ScoreItem extends React.Component{
 		}catch(err){
 			console.log("Unable to find images, using default");
 		}
-		var statusColour = "white";
+
+		// Set the colour for the game's status-bar depending on the status of the game
+		var statusColour = "white";		
 		if(this.props.status === "In Progress"){
 			statusColour = "#29EB81";
 		}
@@ -52,28 +54,33 @@ class ScoreItem extends React.Component{
 		}
 		else if(this.props.status === "Cancelled"){
 			statusColour = "#FF3E3E";
-		}
+		}		
 		var cname = classNames("score-item",
-			{clickable: this.props.clickable}
+			{clickable: this.props.clickable} // if the item is clickable, signify that with the CSS class
 		);
 		return (
 			<div className={cname} onClick={this.navigate} tabIndex={this.props.clickable? 0:-1}>
 				<div className="score-bar">
+					{/* Home Team */}
 					<div className="team-name" style={{background: homewins && !tie? "rgba(41,189,235,0.5)" :"initial" }}>
 						<span>{this.props.hometeam.name}</span>
 						<img src={homeImage?homeImage:DefaultImage} alt="logo" />
 					</div>
+					{/* Home Team Score */}
 					<div className="score">
 						<span>{this.props.hometeam.score? this.props.hometeam.score : "TBD"}</span>
 					</div>
+					{/* Away Team Score */}
 					<div className="score">
 						<span>{this.props.awayteam.score? this.props.awayteam.score : "TBD"}</span>
 					</div>
+					{/* Away Team */}
 					<div className="team-name" style={{background: !homewins && !tie? "rgba(41,189,235,0.5)" :"initial" }}>
 						<img src={awayImage?awayImage:DefaultImage} alt="logo"/>
 						<span>{this.props.awayteam.name}</span>
 					</div>
 				</div>			
+				{/* Status Bar */}
 				<div className="status-bar" style={{background:statusColour}}>
 					<span>{this.props.status}</span>
 				</div>

@@ -1,3 +1,7 @@
+/**
+ * Shows the user the details of the selected games
+ */
+
 import React from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
@@ -18,7 +22,7 @@ var months = [
 class DetailPage extends React.Component{
 	componentWillMount(){		
 		var {year,month,day,dir,type} = this.props.match.params;		
-		if(this.props.scores instanceof Array && this.props.scores.length === 0){
+		if(this.props.scores instanceof Array && this.props.scores.length === 0){ // if the scores aren't loaded, load them (directly went to page)
 			var ndate = new Date(year,parseInt(month,10)-1,day);
 			this.props.changeDate(ndate);
 		}		
@@ -29,7 +33,7 @@ class DetailPage extends React.Component{
 		url += "/month_" + (month < 10? "0" + month : month);
 		url += "/day_" + (day < 10? "0" + day:day);
 		url += "/" + dir;
-		this.props.getDetails(url);				
+		this.props.getDetails(url);	// reconstruct the request url from the url params
 	}
 
 	render(){
@@ -57,6 +61,7 @@ class DetailPage extends React.Component{
 			};			
 		}	
 
+		// The content to render once everything has been loaded
 		var content = (
 			<React.Fragment>
 				<ScoreItem {...itemProps} />
@@ -66,6 +71,7 @@ class DetailPage extends React.Component{
 			</React.Fragment>
 		)
 
+		// Send the user back to the homepage, useful if they go to the details page directly
 		var back = ()=>{
 			this.props.history.push("/");
 		}

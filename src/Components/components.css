@@ -1,3 +1,4 @@
+/* Styling for the Calendar Component */
 #calendar-container{	
 	width: 400px;
 	margin: 0 auto;
@@ -73,7 +74,7 @@
 	cursor: default;
 }
 
-
+/* Styling for the Score Item Component */
 .score-item{	
 	border-top: 2px solid #979797;			
 }
@@ -146,6 +147,7 @@
 	border-top: 1px solid #979797;
 }
 
+/* Styling for the Toggle Button Component */
 button.toggle{
 	border: none;
 	color: white;
@@ -159,6 +161,7 @@ button.toggle.selected{
 	box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);;
 }
 
+/* Stylings for the ScoreBoard and BattingBoard Components*/
 #score-board table, #batting-board table{
 	width: 100%;		
 	border-collapse: collapse;

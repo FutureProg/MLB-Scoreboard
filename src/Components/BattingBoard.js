@@ -1,3 +1,7 @@
+/**
+ * Displays the batting stats for the game
+ */
+
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -13,7 +17,7 @@ class BattingBoard extends React.Component{
 
 	componentWillMount(){
 		this.setState({
-			team: 0
+			team: 0 // 0 => home, 1 => away
 		});
 	}
 
@@ -24,6 +28,7 @@ class BattingBoard extends React.Component{
 	}
 
 	render(){
+		// render the information per player
 		const fetchData = this.props.details.batting[this.state.team].batter.map((item,index)=>{
 			return (
 				<tr key={index}>
@@ -41,7 +46,8 @@ class BattingBoard extends React.Component{
 
 		return (
 			<div id="batting-board">
-				<ToggleGroup onToggle={this.switchTeams}>
+				{/* Toggle Button Group for teams */}
+				<ToggleGroup onToggle={this.switchTeams}>				
 					<ToggleButton name="home">{this.props.details['home_fname']}</ToggleButton>
 					<ToggleButton name="away">{this.props.details['away_fname']}</ToggleButton>
 				</ToggleGroup>

@@ -1,3 +1,7 @@
+/**
+ * Displays the scoreboard
+ */
+
 import React from 'react';
 import {connect} from 'react-redux';
 
@@ -8,6 +12,7 @@ class ScoreBoard extends React.Component{
 	render(){		
 		if(this.props.details['status_ind'] === 'P') return null;
 		const createBoard = (team)=>{		
+			// if there is no score information available, display N/A
 			if(!(this.props.details['linescore']['inning_line_score'] instanceof Array)) return (
 				<React.Fragment>					
 					<td>N/A</td>
@@ -35,7 +40,7 @@ class ScoreBoard extends React.Component{
 						<tr>
 							<th>Team Name</th>
 							{
-								this.props.details['linescore']['inning_line_score'] instanceof Array? 
+								this.props.details['linescore']['inning_line_score'] instanceof Array? // safe-guard in case there is no score information
 								this.props.details['linescore']['inning_line_score'].map((item,index)=><th key={index}>{index+1}</th>)
 								:null
 							}
@@ -47,11 +52,11 @@ class ScoreBoard extends React.Component{
 					<tbody>	
 						<tr>
 							<th>{this.props.details['home_fname']}</th>
-							{createBoard('home')}
+							{createBoard('home') /*Score for home team*/}
 						</tr>			
 						<tr>
 							<th>{this.props.details['away_fname']}</th>
-							{createBoard('away')}							
+							{createBoard('away') /*Score for away team*/}							
 						</tr>		
 
 					</tbody>
